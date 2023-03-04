@@ -7,7 +7,6 @@ type Props = {
 };
 const MainCard: FC<Props> = (props) => {
   const { amount, img } = props;
-  console.log(img);
   return (
     <Box
       sx={{
@@ -46,7 +45,7 @@ const MainCard: FC<Props> = (props) => {
           width: "135px",
         }}
       >
-        <Avatar src="bucchus.png" sx={{ height: "135px", width: "135px" }} />
+        <Avatar src={img} sx={{ height: "135px", width: "135px" }} />
       </Box>
     </Box>
   );

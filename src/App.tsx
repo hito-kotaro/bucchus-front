@@ -23,6 +23,7 @@ const App = () => {
       },
     },
   });
+
   return (
     <ThemeProvider theme={theme}>
       <div className="bg-image" />

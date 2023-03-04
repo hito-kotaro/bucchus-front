@@ -3,6 +3,7 @@ import Autocomplete from "@mui/material/Autocomplete";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import React, { FC, useState } from "react";
+import { menu } from "../data/menu";
 import { MenuType } from "./types/OrderType";
 
 type Props = {
@@ -17,15 +18,9 @@ const InputForm: FC<Props> = (props) => {
     image: "",
   });
 
-  const menu: MenuType[] = [
-    { name: "ビール", image: "beer.png" },
-    { name: "ハイボール", image: "highball.png" },
-    { name: "水", image: "highball.png" },
-  ];
-
   const onlyWater: MenuType[] = [{ name: "水", image: "beer.png" }];
-  const isOptionEqualToValue = (option: MenuType, value: MenuType) => {
-    return option.name === value.name;
+  const isOptionEqualToValue = () => {
+    return true;
   };
 
   return (
@@ -49,7 +44,7 @@ const InputForm: FC<Props> = (props) => {
           onChange={(_, value) => {
             setOrder(value ?? { name: "", image: "" });
           }}
-          value={order}
+          value={order || null}
           id="clear-on-escape"
           clearOnEscape
           renderInput={(params) => (

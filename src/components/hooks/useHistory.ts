@@ -3,7 +3,7 @@ import { useState } from "react";
 import { MenuType, OrderType } from "../types/OrderType";
 import useTimestamp from "./useTimestamp";
 
-const useLocalStorage = () => {
+const useHistory = () => {
   const { genTimestamp } = useTimestamp();
   const [tooManyDrink, setTooManyDrink] = useState(false);
   const [latest, setLatest] = useState<OrderType>(
@@ -83,4 +83,4 @@ const useLocalStorage = () => {
   };
 };
 
-export default useLocalStorage;
+export default useHistory;

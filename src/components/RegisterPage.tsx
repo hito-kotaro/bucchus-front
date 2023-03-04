@@ -2,7 +2,7 @@
 import { Box } from "@mui/material";
 import React, { useEffect } from "react";
 import Header from "./Header";
-import useLocalStorage from "./hooks/useLocalStorage";
+import useHistory from "./hooks/useHistory";
 import InputForm from "./InputForm";
 import MainCard from "./MainCard";
 
@@ -14,7 +14,7 @@ const RegisterPage = () => {
     history,
     latest,
     tooManyDrink,
-  } = useLocalStorage();
+  } = useHistory();
   useEffect(() => {
     initLocalStorage();
     checkDrankWater();

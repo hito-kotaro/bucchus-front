@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import React, { FC } from "react";
-import AvatarWithNameAndTimestamp from "./Molecules/AvatarWithNameAndTimestamp";
+import AvatarWithNameAndTimestamp from "./AvatarWithNameAndTimestamp";
 import { OrderType } from "./types/OrderType";
 
 type Props = {

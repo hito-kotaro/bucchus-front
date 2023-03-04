@@ -1,12 +1,13 @@
 import { Avatar, Box, Typography } from "@mui/material";
 import React, { FC } from "react";
+import { OrderType } from "./types/OrderType";
 
 type Props = {
   amount: number;
-  img: string;
+  latest: OrderType;
 };
 const MainCard: FC<Props> = (props) => {
-  const { amount, img } = props;
+  const { amount, latest } = props;
   return (
     <Box
       sx={{
@@ -14,10 +15,11 @@ const MainCard: FC<Props> = (props) => {
         justifyContent: "space-between",
         width: "100%",
         maxWidth: "288px",
-        height: "165px",
+        height: "200px",
         padding: "10px",
         borderRadius: "10px",
         boxShadow: "3",
+        // backgroundColor: "red",
       }}
     >
       {amount >= 100 ? (
@@ -45,7 +47,18 @@ const MainCard: FC<Props> = (props) => {
           width: "135px",
         }}
       >
-        <Avatar src={img} sx={{ height: "135px", width: "135px" }} />
+        <Avatar src={latest.image} sx={{ height: "135px", width: "135px" }} />
+        <Box>
+          <Typography
+            variant="h6"
+            sx={{ textAlign: "center", fontWeight: "bold" }}
+          >
+            {latest.name}
+          </Typography>
+          <Typography variant="body2" sx={{ textAlign: "center" }}>
+            {latest.timestamp}
+          </Typography>
+        </Box>
       </Box>
     </Box>
   );

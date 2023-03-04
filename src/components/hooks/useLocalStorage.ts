@@ -4,13 +4,14 @@ import useTimestamp from "./useTimestamp";
 
 const useLocalStorage = () => {
   const { genTimestamp } = useTimestamp();
-  const [latest, setLatest] = useState<MenuType>(
+  const [latest, setLatest] = useState<OrderType>(
     JSON.parse(
       localStorage.getItem("latest") ??
         JSON.stringify(
           {
             name: "bucchus",
             image: "bucchus.png",
+            timestamp: "さあ飲もう",
           },
           undefined,
           1
@@ -53,11 +54,11 @@ const useLocalStorage = () => {
 
     array.push(data);
     setHistory(array);
-    setLatest(order);
+    setLatest(data);
     const json = JSON.stringify(array, undefined, 1);
 
     // latestも突っ込む
-    localStorage.setItem("latest", JSON.stringify(order, undefined, 1));
+    localStorage.setItem("latest", JSON.stringify(data, undefined, 1));
     localStorage.setItem("history", json);
   };
 

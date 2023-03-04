@@ -12,8 +12,8 @@ type Props = {
 const InputForm: FC<Props> = (props) => {
   const { onClickOrder } = props;
   const [order, setOrder] = useState<MenuType>({
-    name: "ビール",
-    image: "beer.png",
+    name: "bucchus",
+    image: "bucchus.png",
   });
 
   const menu: MenuType[] = [

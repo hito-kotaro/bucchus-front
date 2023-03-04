@@ -12,6 +12,7 @@ const RegisterPage = () => {
   const { initLocalStorage } = useLocalStorage();
   useEffect(() => {
     initLocalStorage();
+    console.log(latest);
   }, []);
 
   useEffect(() => {
@@ -29,7 +30,7 @@ const RegisterPage = () => {
       }}
     >
       <Header />
-      <MainCard amount={amount} img={latest.image} />
+      <MainCard amount={amount} latest={latest} />
       <Box sx={{ width: "100%", marginTop: "70px" }}>
         <InputForm onClickOrder={updateHistory} />
       </Box>

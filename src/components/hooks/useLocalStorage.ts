@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/no-use-before-define */
 import { useState } from "react";
 import { MenuType, OrderType } from "../types/OrderType";
 import useTimestamp from "./useTimestamp";
 
 const useLocalStorage = () => {
   const { genTimestamp } = useTimestamp();
+  const [tooManyDrink, setTooManyDrink] = useState(false);
   const [latest, setLatest] = useState<OrderType>(
     JSON.parse(
       localStorage.getItem("latest") ??
@@ -62,7 +64,23 @@ const useLocalStorage = () => {
     localStorage.setItem("history", json);
   };
 
-  return { initLocalStorage, updateHistory, history, latest };
+  const checkDrankWater = () => {
+    // 3回以内に水を注文しているかを確認する
+    const pick = history.slice(-3);
+    // 最後の3回に水が含まれていたらtrue
+    const hasWater = pick.some((item) => item.name === "水");
+    // 3杯以上飲んでいてかつ水は飲んでいない場合true
+    setTooManyDrink(history.length >= 3 && !hasWater);
+  };
+
+  return {
+    initLocalStorage,
+    updateHistory,
+    checkDrankWater,
+    history,
+    latest,
+    tooManyDrink,
+  };
 };
 
 export default useLocalStorage;

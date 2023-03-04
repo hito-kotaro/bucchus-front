@@ -1,22 +1,27 @@
 /* eslint-disable consistent-return */
 import { Box } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Header from "./Header";
 import useLocalStorage from "./hooks/useLocalStorage";
 import InputForm from "./InputForm";
 import MainCard from "./MainCard";
 
 const RegisterPage = () => {
-  const [amount, setAmount] = useState(0);
-  const { updateHistory, history, latest } = useLocalStorage();
-  const { initLocalStorage } = useLocalStorage();
+  const {
+    initLocalStorage,
+    updateHistory,
+    checkDrankWater,
+    history,
+    latest,
+    tooManyDrink,
+  } = useLocalStorage();
   useEffect(() => {
     initLocalStorage();
-    console.log(latest);
+    checkDrankWater();
   }, []);
 
   useEffect(() => {
-    setAmount(history.length);
+    checkDrankWater();
   }, [history]);
 
   return (
@@ -30,9 +35,14 @@ const RegisterPage = () => {
       }}
     >
       <Header />
-      <MainCard amount={amount} latest={latest} />
+
+      <MainCard
+        amount={history.length}
+        latest={latest}
+        tooManyDrink={tooManyDrink}
+      />
       <Box sx={{ width: "100%", marginTop: "70px" }}>
-        <InputForm onClickOrder={updateHistory} />
+        <InputForm onClickOrder={updateHistory} tooManyDrink={tooManyDrink} />
       </Box>
     </Box>
   );

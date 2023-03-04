@@ -1,13 +1,15 @@
-import { Avatar, Box, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import React, { FC } from "react";
+import AvatarWithNameAndTimestamp from "./Molecules/AvatarWithNameAndTimestamp";
 import { OrderType } from "./types/OrderType";
 
 type Props = {
   amount: number;
   latest: OrderType;
+  tooManyDrink: boolean;
 };
 const MainCard: FC<Props> = (props) => {
-  const { amount, latest } = props;
+  const { amount, latest, tooManyDrink } = props;
   return (
     <Box
       sx={{
@@ -38,28 +40,19 @@ const MainCard: FC<Props> = (props) => {
           </Typography>
         </Typography>
       )}
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          // bgcolor: "green",
-          width: "135px",
-        }}
-      >
-        <Avatar src={latest.image} sx={{ height: "135px", width: "135px" }} />
-        <Box>
-          <Typography
-            variant="h6"
-            sx={{ textAlign: "center", fontWeight: "bold" }}
-          >
-            {latest.name}
-          </Typography>
-          <Typography variant="body2" sx={{ textAlign: "center" }}>
-            {latest.timestamp}
-          </Typography>
-        </Box>
-      </Box>
+      {tooManyDrink ? (
+        <AvatarWithNameAndTimestamp
+          name="bucchus"
+          image="bucchus.png"
+          timestamp="水を飲むのだ"
+        />
+      ) : (
+        <AvatarWithNameAndTimestamp
+          name={latest.name}
+          image={latest.image}
+          timestamp={latest.timestamp}
+        />
+      )}
     </Box>
   );
 };

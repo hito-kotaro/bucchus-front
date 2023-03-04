@@ -7,20 +7,23 @@ import { MenuType } from "./types/OrderType";
 
 type Props = {
   onClickOrder: (order: MenuType) => void;
+  tooManyDrink: boolean;
 };
 
 const InputForm: FC<Props> = (props) => {
-  const { onClickOrder } = props;
+  const { onClickOrder, tooManyDrink } = props;
   const [order, setOrder] = useState<MenuType>({
-    name: "bucchus",
-    image: "bucchus.png",
+    name: "",
+    image: "",
   });
 
   const menu: MenuType[] = [
     { name: "ビール", image: "beer.png" },
     { name: "ハイボール", image: "highball.png" },
+    { name: "水", image: "highball.png" },
   ];
 
+  const onlyWater: MenuType[] = [{ name: "水", image: "beer.png" }];
   const isOptionEqualToValue = (option: MenuType, value: MenuType) => {
     return option.name === value.name;
   };
@@ -41,11 +44,12 @@ const InputForm: FC<Props> = (props) => {
         <Autocomplete
           sx={{ width: "100%" }}
           isOptionEqualToValue={isOptionEqualToValue}
-          options={menu}
+          options={tooManyDrink ? onlyWater : menu}
           getOptionLabel={(option: MenuType) => option.name}
           onChange={(_, value) => {
             setOrder(value ?? { name: "", image: "" });
           }}
+          value={order}
           id="clear-on-escape"
           clearOnEscape
           renderInput={(params) => (
@@ -63,8 +67,14 @@ const InputForm: FC<Props> = (props) => {
           variant="contained"
           color="secondary"
           sx={{ width: "100%", marginTop: "70px" }}
-          onClick={() => onClickOrder(order)}
-          disabled={order!.name === ""}
+          onClick={() => {
+            setOrder({
+              name: "",
+              image: "",
+            });
+            onClickOrder(order);
+          }}
+          disabled={order.name === ""}
         >
           <Typography variant="h5" color="primary" sx={{ fontWeight: "bold" }}>
             注文

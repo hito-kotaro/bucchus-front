@@ -33,6 +33,7 @@ const InputForm: FC<Props> = (props) => {
         }}
       >
         <Autocomplete
+          test-id="order-menu"
           sx={{ width: "100%" }}
           // 注文ボタンを押した時に、選択を解除するためにvalueをstateで持たせている。
           // 選択解除のタイミングで、valueが""になってoption内に存在しない値となるので警告が出てしまう
@@ -58,6 +59,7 @@ const InputForm: FC<Props> = (props) => {
         />
 
         <Button
+          data-testid="order-btn"
           variant="contained"
           color="secondary"
           sx={{ width: "100%", marginTop: "70px" }}

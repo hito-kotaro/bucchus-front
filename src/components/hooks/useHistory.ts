@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import { useState } from "react";
+import localStorageKeys from "../../data/localStorageKeys";
 import { defaultOrder, MenuType, OrderType } from "../types/OrderType";
 import useTimestamp from "./useTimestamp";
 
@@ -9,18 +10,22 @@ const useHistory = () => {
   const { genTimestamp } = useTimestamp();
   const [tooManyDrink, setTooManyDrink] = useState(false);
   const [latest, setLatest] = useState<OrderType>(
-    JSON.parse(localStorage.getItem("latest") ?? defaultOrderJson)
+    JSON.parse(
+      localStorage.getItem(localStorageKeys.LATEST) ?? defaultOrderJson
+    )
   );
   const [history, setHistory] = useState<OrderType[]>(
-    JSON.parse(localStorage.getItem("history") ?? defaultHistoryJson)
+    JSON.parse(
+      localStorage.getItem(localStorageKeys.HISTORY) ?? defaultHistoryJson
+    )
   );
 
   // 初期化
-  const initLocalStorage = () => {
-    const array = localStorage.getItem("history");
+  const initLocalStorage = (key: string) => {
+    const array = localStorage.getItem(key);
     if (!array) {
       const json = JSON.stringify([], undefined, 1);
-      localStorage.setItem("history", json);
+      localStorage.setItem(key, json);
       setHistory([]);
     }
   };
@@ -28,7 +33,7 @@ const useHistory = () => {
   // localStorageのStringを配列にして返す
   const getHistory = () => {
     const array: OrderType[] = JSON.parse(
-      localStorage.getItem("history") ?? ""
+      localStorage.getItem(localStorageKeys.HISTORY) ?? ""
     );
     return array;
   };
@@ -53,8 +58,14 @@ const useHistory = () => {
     setHistory(array);
     setLatest(data);
 
-    localStorage.setItem("latest", JSON.stringify(array, undefined, 1));
-    localStorage.setItem("history", JSON.stringify(data, undefined, 1));
+    localStorage.setItem(
+      localStorageKeys.HISTORY,
+      JSON.stringify(array, undefined, 1)
+    );
+    localStorage.setItem(
+      localStorageKeys.LATEST,
+      JSON.stringify(data, undefined, 1)
+    );
   };
 
   // 水のんだかチェック

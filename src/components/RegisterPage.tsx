@@ -5,6 +5,7 @@ import Header from "./Header";
 import useHistory from "./hooks/useHistory";
 import InputForm from "./InputForm";
 import MainCard from "./MainCard";
+import localStorageKeys from "../data/localStorageKeys";
 
 const RegisterPage = () => {
   const {
@@ -17,7 +18,7 @@ const RegisterPage = () => {
   } = useHistory();
 
   useEffect(() => {
-    initLocalStorage();
+    initLocalStorage(localStorageKeys.HISTORY);
     checkDrankWater();
   }, []);
 

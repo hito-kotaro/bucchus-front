@@ -41,6 +41,7 @@ const useHistory = () => {
   // MenuTypeのデータをもとにOrderTypeを作成して返す
   const createData = (order: MenuType) => {
     const data: OrderType = {
+      id: order.id,
       name: order.name,
       image: order.image,
       timestamp: genTimestamp(),

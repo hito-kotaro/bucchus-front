@@ -14,11 +14,12 @@ type Props = {
 const InputForm: FC<Props> = (props) => {
   const { onClickOrder, tooManyDrink } = props;
   const [order, setOrder] = useState<MenuType>({
+    id: -1,
     name: "",
     image: "",
   });
 
-  const onlyWater: MenuType[] = [{ name: "水", image: "beer.png" }];
+  const onlyWater: MenuType[] = [{ id: 1, name: "水", image: "beer.png" }];
   return (
     <Box
       sx={{
@@ -42,7 +43,7 @@ const InputForm: FC<Props> = (props) => {
           options={tooManyDrink ? onlyWater : menu}
           getOptionLabel={(option: MenuType) => option.name}
           onChange={(_, value) => {
-            setOrder(value ?? { name: "", image: "" });
+            setOrder(value ?? { id: -1, name: "", image: "" });
           }}
           value={order || null}
           id="clear-on-escape"
@@ -65,6 +66,7 @@ const InputForm: FC<Props> = (props) => {
           sx={{ width: "100%", marginTop: "70px" }}
           onClick={() => {
             setOrder({
+              id: -1,
               name: "",
               image: "",
             });

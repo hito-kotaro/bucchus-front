@@ -13,6 +13,7 @@ parserOptions:
   project: ./tsconfig.json
 plugins:
   - react
+ignorePatterns: ["*.test.js"]
 rules:
   {
     "arrow-body-style": 0,

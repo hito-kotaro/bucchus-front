@@ -75,10 +75,20 @@ const useHistory = () => {
     setTooManyDrink(history.length >= 3 && !hasWater);
   };
 
+  const resetHistory = () => {
+    localStorage.removeItem(localStorageKeys.HISTORY);
+    localStorage.removeItem(localStorageKeys.LATEST);
+    initLocalStorage(localStorageKeys.HISTORY);
+    const array: OrderType[] = getHistory();
+    setHistory(array);
+    setLatest(defaultOrder);
+  };
+
   return {
     initLocalStorage,
     updateHistory,
     checkDrankWater,
+    resetHistory,
     history,
     latest,
     tooManyDrink,

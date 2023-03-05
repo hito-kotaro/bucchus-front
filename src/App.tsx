@@ -3,7 +3,7 @@ import { Box } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import { createTheme } from "@mui/material/styles";
 import "./App.css";
-import RegisterPage from "./components/RegisterPage";
+import MainPage from "./components/pages/MainPage";
 
 const App = () => {
   const theme = createTheme({
@@ -27,7 +27,7 @@ const App = () => {
       <div className="bg-image" />
       <CssBaseline />
       <Box sx={{ paddingTop: "100px" }}>
-        <RegisterPage />
+        <MainPage />
       </Box>
     </ThemeProvider>
   );

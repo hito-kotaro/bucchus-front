@@ -2,7 +2,7 @@ import { Box, Typography } from "@mui/material";
 import React, { FC } from "react";
 import AvatarWithNameAndTimestamp from "./AvatarWithNameAndTimestamp";
 import { OrderType } from "./types/OrderType";
-import messages from "../data/messages";
+import { messages, screenText } from "../data/messages";
 
 type Props = {
   amount: number;
@@ -22,7 +22,6 @@ const MainCard: FC<Props> = (props) => {
         padding: "10px",
         borderRadius: "10px",
         boxShadow: "3",
-        // backgroundColor: "red",
       }}
     >
       {amount >= 100 ? (
@@ -37,7 +36,7 @@ const MainCard: FC<Props> = (props) => {
             component="span"
             sx={{ fontWeight: "bold" }}
           >
-            {amount >= 100 ? "" : "杯目"}
+            {amount >= 100 ? "" : screenText.unit}
           </Typography>
         </Typography>
       )}

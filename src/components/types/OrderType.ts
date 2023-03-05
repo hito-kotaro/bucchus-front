@@ -1,4 +1,4 @@
-import messages from "../../data/messages";
+import { messages } from "../../data/messages";
 
 export type OrderType = {
   id: number;

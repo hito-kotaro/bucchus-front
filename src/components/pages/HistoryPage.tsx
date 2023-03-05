@@ -4,6 +4,7 @@ import Box from "@mui/material/Box";
 import { FC } from "react";
 import HistoryListItem from "../atoms/HistoryListItem";
 import { OrderType } from "../types/OrderType";
+import { screenText } from "../../data/messages";
 
 type Props = {
   history: OrderType[];
@@ -24,12 +25,11 @@ const HistoryPage: FC<Props> = (props) => {
         }}
       >
         <Typography variant="h4" sx={{ color: "#fff" }}>
-          History
+          {screenText.historyHeader}
         </Typography>
       </Box>
       <Box
         sx={{
-          // bgcolor: "red",
           height: "70vh",
           padding: "4px",
           overflowY: "scroll",
@@ -37,8 +37,6 @@ const HistoryPage: FC<Props> = (props) => {
           flexDirection: "column",
           boxShadow: "10",
           borderRadius: "10px",
-          // borderEndEndRadius: "10px",
-          // borderEndStartRadius: "10px",
           gap: "10px",
         }}
       >

@@ -9,6 +9,7 @@ import {
 import Box from "@mui/material/Box";
 import React, { FC, useState } from "react";
 import { menu, onlyWater } from "../data/menu";
+import { screenText } from "../data/messages";
 import useInputForm from "./hooks/useInputForm";
 import { blankMenu, MenuType } from "./types/OrderType";
 
@@ -78,7 +79,7 @@ const InputForm: FC<Props> = (props) => {
           disabled={order.name === "" || order.id === 0}
         >
           <Typography variant="h5" color="primary" sx={{ fontWeight: "bold" }}>
-            注文
+            {screenText.orderButton}
           </Typography>
         </Button>
       </Box>

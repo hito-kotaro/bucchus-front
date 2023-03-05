@@ -6,8 +6,6 @@ import "./App.css";
 import RegisterPage from "./components/RegisterPage";
 
 const App = () => {
-  // OSのテーマが取得できるらしい(これは多分Windows用)
-  // const isDarkMode = useMediaQuery("(prefes-color-scheme: dark)");
   const theme = createTheme({
     palette: {
       mode: "light",

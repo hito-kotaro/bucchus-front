@@ -2,6 +2,7 @@ import { Box, Typography } from "@mui/material";
 import React, { FC } from "react";
 import AvatarWithNameAndTimestamp from "./AvatarWithNameAndTimestamp";
 import { OrderType } from "./types/OrderType";
+import messages from "../data/messages";
 
 type Props = {
   amount: number;
@@ -26,7 +27,7 @@ const MainCard: FC<Props> = (props) => {
     >
       {amount >= 100 ? (
         <Typography variant="h2" sx={{ fontWeight: "bold" }}>
-          ばかたれ
+          {messages.tooMany}
         </Typography>
       ) : (
         <Typography variant="h2" sx={{ fontWeight: "bold" }}>
@@ -44,7 +45,7 @@ const MainCard: FC<Props> = (props) => {
         <AvatarWithNameAndTimestamp
           name="bucchus"
           image="bucchus.png"
-          timestamp="水を飲むのだ"
+          timestamp={messages.needWater}
         />
       ) : (
         <AvatarWithNameAndTimestamp

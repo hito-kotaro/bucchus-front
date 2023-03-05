@@ -15,6 +15,7 @@ const RegisterPage = () => {
     latest,
     tooManyDrink,
   } = useHistory();
+
   useEffect(() => {
     initLocalStorage();
     checkDrankWater();

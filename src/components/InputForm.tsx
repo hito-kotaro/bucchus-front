@@ -19,10 +19,6 @@ const InputForm: FC<Props> = (props) => {
   });
 
   const onlyWater: MenuType[] = [{ name: "水", image: "beer.png" }];
-  const isOptionEqualToValue = () => {
-    return true;
-  };
-
   return (
     <Box
       sx={{
@@ -38,7 +34,10 @@ const InputForm: FC<Props> = (props) => {
       >
         <Autocomplete
           sx={{ width: "100%" }}
-          isOptionEqualToValue={isOptionEqualToValue}
+          // 注文ボタンを押した時に、選択を解除するためにvalueをstateで持たせている。
+          // 選択解除のタイミングで、valueが""になってoption内に存在しない値となるので警告が出てしまう
+          // ので常にtrueを返している
+          isOptionEqualToValue={() => true}
           options={tooManyDrink ? onlyWater : menu}
           getOptionLabel={(option: MenuType) => option.name}
           onChange={(_, value) => {

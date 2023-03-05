@@ -19,3 +19,9 @@ export type MenuType = {
   name: string;
   image: string;
 };
+
+export const blankMenu: MenuType = {
+  id: 0,
+  name: "None",
+  image: "",
+};

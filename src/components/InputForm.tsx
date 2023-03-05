@@ -1,10 +1,16 @@
-import { Button, Typography } from "@mui/material";
-import Autocomplete from "@mui/material/Autocomplete";
+import {
+  Button,
+  FormControl,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+  Typography,
+} from "@mui/material";
 import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
 import React, { FC, useState } from "react";
-import { menu } from "../data/menu";
-import { MenuType } from "./types/OrderType";
+import { menu, onlyWater } from "../data/menu";
+import useInputForm from "./hooks/useInputForm";
+import { blankMenu, MenuType } from "./types/OrderType";
 
 type Props = {
   onClickOrder: (order: MenuType) => void;
@@ -13,13 +19,13 @@ type Props = {
 
 const InputForm: FC<Props> = (props) => {
   const { onClickOrder, tooManyDrink } = props;
-  const [order, setOrder] = useState<MenuType>({
-    id: -1,
-    name: "",
-    image: "",
-  });
+  const { pickMenu } = useInputForm();
+  const [order, setOrder] = useState<MenuType>(blankMenu);
 
-  const onlyWater: MenuType[] = [{ id: 1, name: "水", image: "beer.png" }];
+  const handleChange = (event: SelectChangeEvent) => {
+    setOrder(pickMenu(Number(event.target.value) ?? 0) ?? blankMenu);
+  };
+
   return (
     <Box
       sx={{
@@ -33,31 +39,26 @@ const InputForm: FC<Props> = (props) => {
           width: "80%",
         }}
       >
-        <Autocomplete
-          test-id="order-menu"
-          sx={{ width: "100%" }}
-          // 注文ボタンを押した時に、選択を解除するためにvalueをstateで持たせている。
-          // 選択解除のタイミングで、valueが""になってoption内に存在しない値となるので警告が出てしまう
-          // ので常にtrueを返している
-          isOptionEqualToValue={() => true}
-          options={tooManyDrink ? onlyWater : menu}
-          getOptionLabel={(option: MenuType) => option.name}
-          onChange={(_, value) => {
-            setOrder(value ?? { id: -1, name: "", image: "" });
-          }}
-          value={order || null}
-          id="clear-on-escape"
-          clearOnEscape
-          renderInput={(params) => (
-            <TextField
-              // eslint-disable-next-line react/jsx-props-no-spreading
-              {...params}
-              variant="standard"
-              placeholder="飲み物を選択"
-              color="primary"
-            />
-          )}
-        />
+        <FormControl variant="standard" sx={{ width: "100%" }}>
+          <Select
+            labelId="demo-simple-select-standard-label"
+            id="demo-simple-select-standard"
+            value={String(order.id)}
+            onChange={handleChange}
+          >
+            {tooManyDrink
+              ? onlyWater.map((item: MenuType) => (
+                  <MenuItem key={item.id} value={item.id}>
+                    {item.name}
+                  </MenuItem>
+                ))
+              : menu.map((item) => (
+                  <MenuItem key={item.id} value={item.id}>
+                    {item.name}
+                  </MenuItem>
+                ))}
+          </Select>
+        </FormControl>
 
         <Button
           data-testid="order-btn"
@@ -65,14 +66,16 @@ const InputForm: FC<Props> = (props) => {
           color="secondary"
           sx={{ width: "100%", marginTop: "70px" }}
           onClick={() => {
+            // toomanydrinkだったらビールをセット
             setOrder({
-              id: -1,
-              name: "",
-              image: "",
+              id: 0,
+              name: "None",
+              image: "drinks/beer.png",
             });
+
             onClickOrder(order);
           }}
-          disabled={order.name === ""}
+          disabled={order.name === "" || order.id === 0}
         >
           <Typography variant="h5" color="primary" sx={{ fontWeight: "bold" }}>
             注文
